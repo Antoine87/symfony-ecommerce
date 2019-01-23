@@ -1,0 +1,24 @@
+nelmio_alice:
+    # Default locale for the Faker Generator
+    locale: en_US
+
+    # Value used make sure Faker generates data consistently across runs, set to null to disable.
+    seed: null
+
+    # Some PHP native functions may conflict with Faker formatters.
+    # By default, PHP native functions are used over Faker formatters.
+    # If you want to change that, simply blacklist the PHP function.
+    functions_blacklist:
+        - 'current'
+        - 'shuffle'
+        - 'date'
+        - 'time'
+        - 'file'
+        - 'md5'
+        - 'sha1'
+
+    # Alice may do some recursion to resolve certain values. This parameter defines a limit which will stop the resolution once reached.
+    loading_limit: 5
+
+    # Maximum number of time Alice can try to generate a unique value before stopping and failing.
+    max_unique_values_retry: 150

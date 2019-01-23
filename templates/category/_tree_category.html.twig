@@ -1,0 +1,36 @@
+{% use 'base.html.twig' %}
+
+{% import _self as self %}
+
+<ul class="list-unstyled">
+    {{ self.treeCategory(rootCategory) }}
+</ul>
+
+{% macro treeCategory(rootCategory) %}
+    {% import _self as self %}
+    {% for category in rootCategory %}
+        {% if category.__children %}
+            <li>
+                <span>
+                    <i data-toggle="collapse" data-target="#categoryTree{{ category.id }}"
+                       class="fa fa-chevron-right category-tree-chevron" aria-hidden="true"></i>
+                    <a href="{{ path('categories_show', {slug: category.slug}) }}">{{ category.name }}</a>
+                </span>
+                <span class="float-right badge badge-light round">{{ category.total_products }}</span>
+                <ul class="list-unstyled pl-3 collapse" id="categoryTree{{ category.id }}">
+                    {{ self.treeCategory(category.__children) }}
+                </ul>
+            </li>
+        {% else %}
+            <li>
+                <span>
+                    <i class="category-tree-chevron" aria-hidden="true"></i>
+                    <a href="{{ path('categories_show', {slug: category.slug}) }}">{{ category.name }}</a>
+                </span>
+                <span class="float-right badge badge-light round">{{ category.total_products }}</span>
+            </li>
+        {% endif %}
+    {% else %}
+        No category
+    {% endfor %}
+{% endmacro %}

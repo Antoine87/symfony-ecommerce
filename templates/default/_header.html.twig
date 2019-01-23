@@ -1,0 +1,52 @@
+<header class="shadow">
+    <nav class="main-navbar navbar navbar-top navbar-expand navbar-light bg-light">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="{{ path('homepage') }}">Ecommerce</a>
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarCollapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item active">
+                        <a class="nav-link" href="#">Home<span class="sr-only">(current)</span></a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">About</a>
+                    </li>
+                </ul>
+                <ul class="navbar-nav">
+                    {% if is_granted('ROLE_CUSTOMER') %}
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
+                               data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-user" aria-hidden="true"></i>
+                            </a>
+                            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                                <a class="dropdown-item" href="#">Account</a>
+                                <div class="dropdown-divider"></div>
+                                <a class="dropdown-item" href="{{ path('customer_logout') }}">Logout</a>
+                            </div>
+                        </li>
+                    {% else %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('customer_login') }}">Sign In</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="{{ path('customer_register') }}">Register</a>
+                        </li>
+                    {% endif %}
+                </ul>
+                <a href="{{ path('shopping_cart_show') }}" class="widget-header border-left pl-3">
+                    <div class="icontext">
+                        <div class="icon-wrap icon-sm round border"><i class="fa fa-shopping-cart"></i></div>
+                    </div>
+                    {% if cart is defined %}
+                        <span class="badge badge-pill badge-danger notify" id="cart-badge-items">{{ cart.orderedItems|length }}</span>
+                    {% else %}
+                        <span class="badge badge-pill badge-danger notify" id="cart-badge-items">-</span>
+                    {% endif %}
+                </a>
+            </div>
+        </div>
+    </nav>
+</header>

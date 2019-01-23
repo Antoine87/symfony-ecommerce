@@ -1,0 +1,11 @@
+vich_uploader:
+    db_driver: orm
+
+    mappings:
+        category_images:
+            uri_prefix: '%app.path.category_images%'
+            upload_destination: '%app.path.public%%app.path.category_images%'
+
+        product_images:
+            uri_prefix: '%app.path.product_images%'
+            upload_destination: '%app.path.public%%app.path.product_images%'

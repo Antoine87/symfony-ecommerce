@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <title>{% block title %}Ecommerce Demo application{% endblock %}</title>
+        {% block stylesheets %}
+            {{ encore_entry_link_tags('css/app') }}
+        {% endblock %}
+    </head>
+    <body id="{% block body_id %}{% endblock %}">
+        {% block header %}
+        {% endblock %}
+
+        {% block body %}
+        {% endblock %}
+
+        {% block footer %}
+            <footer></footer>
+        {% endblock %}
+
+        {% block javascripts %}
+            {{ encore_entry_script_tags('js/app') }}
+        {% endblock %}
+    </body>
+</html>

@@ -1,0 +1,70 @@
+<div id="menu_filter" class="card card-filter">
+    <article class="card-group-item filter-by-category">
+        <header class="card-header">
+            <a class="" aria-expanded="true" href="#" data-toggle="collapse"
+               data-target="#collapse22">
+                <h6 class="title">Categories</h6>
+            </a>
+        </header>
+        <div style="" class="filter-content collapse show" id="collapse22">
+            <div class="card-body">
+                {{ include('category/_tree_category.html.twig', {rootCategory: categories}, with_context = false) }}
+            </div>
+        </div>
+    </article>
+    <article class="card-group-item filter-by-price">
+        <header class="card-header">
+            <a href="#" data-toggle="collapse" data-target="#collapse33" aria-expanded="true"
+               class="">
+                <h6 class="title">Price </h6>
+            </a>
+        </header>
+        <div class="filter-content collapse show" id="collapse33" style="">
+            <div class="card-body">
+                <form>
+                    <input type="range" class="custom-range" min="0" max="100" name="">
+                    <div class="form-row">
+                        <div class="form-group col-sm-6">
+                            <label>Min</label>
+                            <input class="form-control filter-min-price" name="lp" placeholder="&euro;0"
+                                   type="number" value="{{ searchParams.lowPrice }}">
+                        </div>
+                        <div class="form-group text-right col-sm-6">
+                            <label>Max</label>
+                            <input class="form-control filter-max-price" name="hp" placeholder="&euro;1,0000"
+                                   type="number" value="{{ searchParams.highPrice }}">
+                        </div>
+                    </div>
+                    <button type="button" class="btn btn-block btn-outline-primary">Apply</button>
+                </form>
+            </div>
+        </div>
+    </article>
+    <article class="card-group-item filter-by-feature">
+        <header class="card-header">
+            <a href="#" data-toggle="collapse" data-target="#collapse44">
+                <h6 class="title">Feature </h6>
+            </a>
+        </header>
+        <div class="filter-content collapse show" id="collapse44">
+            <div class="card-body">
+                <form>
+                    {% for feature in features %}
+                        <label class="form-check">
+                            <input class="form-check-input"
+                                   type="checkbox"
+                                   name="{{ feature.slug }}"
+                                   {% if searchParams.features[feature.slug] is defined %}
+                                       checked
+                                   {% endif %}>
+                            <span class="form-check-label">
+                            <span class="float-right badge badge-light round">{{ feature.products|length }}</span>
+                            {{ feature.value }}
+                          </span>
+                        </label>
+                    {% endfor %}
+                </form>
+            </div>
+        </div>
+    </article>
+</div>

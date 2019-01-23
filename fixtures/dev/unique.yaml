@@ -1,0 +1,40 @@
+App\Module\Customer\PostalAddress:
+    test_address:
+        addressCountry: 'France'
+        addressCity: 'Paris'
+        postalCode: '75000'
+        streetAddress: 'Avenue des Champs-Élysées'
+
+    antoine_address:
+        addressCountry: 'France'
+        addressCity: 'Rouen'
+        postalCode: '76000'
+        streetAddress: 'Rue du Gros Horloge'
+
+App\Module\Customer\Person:
+    test_person:
+        address: '@test_address'
+        email: 'test@mail.com'
+        familyName: 'Test lastname'
+        givenName: 'Test firstname'
+        telephone: '+33600000000'
+
+    antoine_person:
+        address: '@antoine_address'
+        email: 'mantodev76@gmail.com'
+        familyName: 'Test'
+        givenName: 'Antoine'
+        telephone: '+33600000000'
+
+App\Module\Customer\Customer:
+    test_customer:
+        __construct:
+            login: 'test'
+            password: 'secret'
+            person: '@test_person'
+
+    antoine_customer:
+        __construct:
+            login: 'antoine'
+            password: 'secret'
+            person: '@antoine_person'

@@ -1,0 +1,140 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Shopping cart{% endblock %}
+
+{% block body_id 'shopping_cart_show' %}
+
+{% block header %}
+    {{ include('default/_header.html.twig') }}
+{% endblock %}
+
+{% block body %}
+    <section class="section-pagetop">
+        <div class="jumbotron bg-secondary text-center p-sm-4 m-0">
+            <h2>Heading</h2>
+        </div>
+    </section>
+    <section class="section-content bg py-4">
+            <div class="container-fluid">
+                <div class="row">
+                    <main class="col-sm-9">
+                        <div class="card" style="min-height: 25em;">
+                            <table class="table table-hover shopping-cart-wrap">
+                                <thead class="text-muted">
+                                <tr>
+                                    <th scope="col">Product</th>
+                                    <th scope="col" width="120">Quantity</th>
+                                    <th scope="col" width="120">Price</th>
+                                    <th scope="col" class="text-right" width="200">Action</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                {% for item in cart.orderedItems %}
+                                    <tr>
+                                        <td>
+                                            <figure class="media">
+                                                <div class="img-wrap">
+                                                    {% if item.orderedItem.itemOffered.image %}
+                                                        <img src="{{ vich_uploader_asset(item.orderedItem.itemOffered, 'imageFile', 'App\\Module\\Product\\Product') }}"
+                                                             class="img-thumbnail img-sm">
+                                                    {% else %}
+                                                        <img class="img-thumbnail img-sm" src="{{ asset('build/images/common/image_not_found.png') }}" alt="">
+                                                    {% endif %}
+                                                </div>
+                                                <figcaption class="media-body">
+                                                    <h6 class="title text-truncate">{{ item.orderedItem.itemOffered.name }}</h6>
+                                                    <dl class="dlist-inline small">
+                                                        <dt>Size: </dt>
+                                                        <dd>XXL</dd>
+                                                    </dl>
+                                                    <dl class="dlist-inline small">
+                                                        <dt>Color: </dt>
+                                                        <dd>Orange color</dd>
+                                                    </dl>
+                                                </figcaption>
+                                            </figure>
+                                        </td>
+                                        <td>
+                                            {% if item.orderQuantity >= 10 %}
+                                                <input type="text" class="form-control" value="{{ item.orderQuantity }}">
+                                            {% else %}
+                                                <select class="form-control quantity-select">
+                                                    {% for i in 1..9 %}
+                                                        <option value="{{ i }}" {% if item.orderQuantity == i %}selected{% endif %}>
+                                                            {{ i }}
+                                                        </option>
+                                                    {% endfor %}
+                                                    <option class="quantity-option-10">10+</option>
+                                                </select>
+                                            {% endif %}
+                                        </td>
+                                        <td>
+                                            <div class="price-wrap">
+                                                <small class="text-muted">{{ item.orderedItem.priceCurrency }} {{ item.orderedItem.price }}</small>
+                                            </div>
+                                        </td>
+                                        <td class="text-right">
+                                            <a data-original-title="Save to Wishlist" title="" href=""
+                                               class="btn btn-outline-success" data-toggle="tooltip">
+                                                <i class="fa fa-heart"></i>
+                                            </a>
+
+                                            <form class="d-inline"
+                                                  data-remove-item="true"
+                                                  action="{{ path('shopping_cart_remove_item', {offer: item.orderedItem.id}) }}"
+                                                  method="post">
+                                                <button type="submit" class="btn btn-outline-danger"> × Remove</button>
+                                            </form>
+                                        </td>
+                                    </tr>
+                                {% else %}
+                                    <tr>
+                                        <td>
+                                            <p>You cart is empty.</p>
+                                        </td>
+                                    </tr>
+                                {% endfor %}
+                                </tbody>
+                            </table>
+                        </div>
+                    </main>
+                    <aside class="col-sm-3">
+                        <p class="alert alert-success">Add USD 5.00 of eligible items to your order to qualify for FREE Shipping. </p>
+                        {% if cart.orderedItems %}
+                            <dl class="dlist-align">
+                                <dt>Total price: </dt>
+                                <dd class="text-right">EUR {{ cart.totalPrice }}</dd>
+                            </dl>
+                            <dl class="dlist-align">
+                                <dt>Discount:</dt>
+                                <dd class="text-right">todo</dd>
+                            </dl>
+                            <dl class="dlist-align h4">
+                                <dt>Total:</dt>
+                                <dd class="text-right"><strong>EUR {{ cart.totalPrice }}</strong></dd>
+                            </dl>
+                        {% endif %}
+                        <hr>
+                        <figure class="itemside mb-3">
+                            <aside class="aside"><img src="{{ asset('build/images/common/pay-visa.png') }}"></aside>
+                            <div class="text-wrap small text-muted">
+                                Pay 84.78 AED ( Save 14.97 AED )
+                                By using ADCB Cards
+                            </div>
+                        </figure>
+                        <figure class="itemside mb-3">
+                            <aside class="aside"> <img src="{{ asset('build/images/common/pay-mastercard.png') }}"> </aside>
+                            <div class="text-wrap small text-muted">
+                                Pay by MasterCard and Save 40%. <br>
+                                Lorem ipsum dolor
+                            </div>
+                        </figure>
+                        <hr>
+                        <div class="text-center">
+                            <button class="btn btn-primary w-100">Proceed to checkout</button>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+    </section>
+{% endblock %}

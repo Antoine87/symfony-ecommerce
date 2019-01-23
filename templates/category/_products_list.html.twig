@@ -1,0 +1,87 @@
+{% use 'base.html.twig' %}
+
+{% if products is not empty %}
+    {% for product in products %}
+        {% set reviewRating = average(product.reviews, 'reviewRating')|round %}
+        <article class="card card-product">
+            <div class="card-body">
+                <div class="row">
+                    <aside class="col-sm-3">
+                        <div class="img-wrap">
+                            {% if product.image %}
+                                <a href="{{ path('products_show', {slug: product.slug}) }}">
+                                    <img class="img-fluid" src="{{ vich_uploader_asset(product, 'imageFile', 'App\\Module\\Product\\Product') }}" alt="">
+                                </a>
+                            {% else %}
+                                <img class="img-fluid" src="{{ asset('build/images/common/image_not_found.png') }}" alt="">
+                            {% endif %}
+                        </div>
+                    </aside>
+                    <article class="col-sm-6">
+                        <h4 class="title">{{ product.name }}</h4>
+                        <div class="rating-wrap mb-2">
+                            <ul class="rating-stars">
+                                <li style="width:80%" class="stars-active">
+                                    {% if reviewRating %}
+                                        {% for i in 1..reviewRating %}
+                                            <i class="fa fa-star"></i>
+                                        {% endfor %}
+                                    {% endif %}
+                                </li>
+                                <li>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                    <i class="fa fa-star"></i>
+                                </li>
+                            </ul>
+                            <div class="label-rating">{{ product.reviews|length }} reviews</div>
+                        </div>
+                        {{ product.valueProposition }}
+                    </article>
+                    <aside class="col-sm-3 border-left">
+                        <div class="action-wrap">
+                            <div class="price-wrap h4">
+                                {% if product.offers is not empty %}
+                                    <span class="price">{{ product.offers.first.price }} &euro;</span>
+                                {% else %}
+                                    <span class="price">n/a</span>
+                                {% endif %}
+                                {#<del class="price-old"> $98</del>#}
+                            </div>
+                            <p class="text-success">Free shipping</p>
+                            <br>
+                            <p>
+                                {% if product.offers is not empty %}
+                                    <form class="d-inline"
+                                          data-buy-offer="true"
+                                          action="{{ path('shopping_cart_add_item', {offer: product.offers.first.id}) }}"
+                                          method="post">
+                                        <input type="hidden" name="quantity" value="1"> {# <-- optional (1 if not provided) #}
+                                        <button type="submit" class="btn btn-primary">Buy now</button>
+                                    </form>
+                                {% else %}
+                                    <button type="button" class="btn btn-primary disabled">Buy now</button>
+                                {% endif %}
+                                <a href="{{ path('products_show', {slug: product.slug}) }}" class="btn btn-secondary"> Details </a>
+                            </p>
+                            <a href="#"><i class="fa fa-heart"></i> Add to wishlist</a>
+                        </div>
+                    </aside>
+                </div>
+            </div>
+        </article>
+    {% endfor %}
+
+    {% if products.haveToPaginate %}
+        <div class="d-flex justify-content-center">
+            {{ pagerfanta(products, 'twitter_bootstrap4_translated', {
+                routeName: 'categories_show_paginated',
+                routeParams: {slug: category.slug}
+            }) }}
+        </div>
+    {% endif %}
+{% else %}
+    No product found.
+{% endif %}

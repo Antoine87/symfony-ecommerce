@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="480" height="480"
+viewBox="0 0 48 48" xmlns:xlink="http://www.w3.org/1999/xlink">
+<defs>
+<linearGradient id="lg1">
+<stop stop-color="#039" offset="0"/>
+<stop stop-color="#0065F5" offset="1"/>
+</linearGradient>
+<linearGradient id="lg2">
+<stop stop-color="#fff" offset="0"/>
+<stop stop-color="#fff" offset=".5"/>
+<stop stop-color="#fff" offset="1" stop-opacity="0"/>
+</linearGradient>
+<linearGradient id="lg3">
+<stop stop-color="#fff" offset="0"/>
+<stop stop-color="#B3DFFB" offset="1"/>
+</linearGradient>
+<linearGradient id="lg4">
+<stop stop-color="#2F8FFE" offset="0"/>
+<stop stop-color="#06F" offset=".13"/>
+<stop stop-color="#B4E0FB" offset="1"/>
+</linearGradient>
+
+<linearGradient id="lg11" xlink:href="#lg1"
+x1="13.5"
+y1="5.8"
+x2="36.8"
+y2="24"
+gradientUnits="userSpaceOnUse"/>
+<linearGradient id="lg44" xlink:href="#lg4"
+x1="24.4"
+y1="31.9"
+x2="9.1"
+y2="12.8"
+gradientUnits="userSpaceOnUse"/>
+<linearGradient id="lg33" xlink:href="#lg3"
+x1="14.9"
+y1="7.3"
+x2="13.4"
+y2="9.2"
+gradientUnits="userSpaceOnUse"/>
+<radialGradient id="rg2" xlink:href="#lg2"
+cx="18.3"
+cy="30.3"
+r="6.3"
+fx="18.3"
+fy="30.3"
+gradientUnits="userSpaceOnUse"
+gradientTransform="matrix(1.0037,-0.7988,0.09911,0.1245,-3.0722,41.1898)"/>
+</defs>
+<g transform="scale(-1,1) rotate(90)">
+<path fill="url(#lg11)"
+d="M13.25,4.91c-1.94,.12-3.22,1.92-3.22,5.16v2.47c0,1.35 .86,3.1 1.9,3.94l9.53,7.66-9.53
+7.69c-1.05,.84-1.9,2.6-1.9,3.94v2.47c0,3.24 1.28,5.04 3.22,5.16c1.16,.07 2.55-.47
+4.06-1.69l19.9-16c1.08-.86 1.08-2.26 0-3.13l-19.91-15.97c-1.52-1.22-2.9-1.76-4.06-1.69z"/>
+<path fill="url(#lg44)"
+d="M13.38,6.9c.45-.03 1.4,.22 2.7,1.25l19.9,15.97-19.91,16c-1.28,1.03-2.24,1.28-2.7
+1.25c-.38-.02-.5-.08-.78-.5c-.27-.42-.56-1.3-.56-2.66v-2.47c0-.5 .75-2.05
+1.16-2.38l9.53-7.69l1.94-1.56-1.94-1.56-9.53-7.66c-.4-.33-1.16-1.88-1.16-2.38v-2.47c0-1.36
+.29-2.24 .56-2.66c.27-.4 .4-.48 .78-.5z"/>
+<path fill="url(#rg2)" opacity=".6"
+d="m24.66,24.13l-11.47,9.25c-.4,.33-1.16,1.88-1.16,2.38v0.75l12.63-10.16v-2.22z"/>
+<path fill="url(#lg33)" opacity=".8"
+d="M13.38,6.9c-.38,0-.5,.08-.78,.5c-.18,.28-.36,.79-.47,1.5l21.44
+17.16l2.4-1.94-19.91-15.97c-1.28-1-2.24-1.28-2.6-1.25z"/>
+</g>
+</svg>

@@ -1,0 +1,32 @@
+security:
+    encoders:
+        App\Module\Customer\Customer:
+            algorithm: bcrypt
+            cost: 4
+
+    providers:
+        database_customers:
+            entity:
+                class: App\Module\Customer\Customer
+                property: login
+
+    firewalls:
+        dev:
+            pattern: ^/(_(profiler|wdt)|css|images|js)/
+            security: false
+
+        customer:
+            anonymous: true
+            guard:
+                authenticators:
+                    - App\Security\CustomerAuthenticator
+            logout:
+                path: customer_logout
+                target: homepage
+            remember_me:
+                secret: '%kernel.secret%'
+                lifetime: 86400 # 24 hours
+
+    access_control:
+        # - { path: ^/admin, roles: ROLE_ADMIN }
+        # - { path: ^/profile, roles: ROLE_USER }

@@ -1,0 +1,26 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        bind:
+            $aliceGenerator: '@nelmio_alice.faker.generator'
+            $fixturesResourcesDir: '%kernel.project_dir%/fixtures/resources'
+
+    App\DataFixtures\Provider\CategoryProvider:
+        bind:
+            $categoryImagesDir: '%app.path.public%%app.path.category_images%'
+
+    App\DataFixtures\Provider\ProductProvider:
+        bind:
+            $productImagesDir: '%app.path.public%%app.path.product_images%'
+
+    app.fidry_alice_data_fixtures.loader.simple:
+        class: Fidry\AliceDataFixtures\Loader\SimpleLoader
+        arguments:
+            - '@nelmio_alice.files_loader'
+            - '@logger'
+
+    fidry_alice_data_fixtures.loader.simple:
+        class: App\DataFixtures\Loader\CustomLoader
+        arguments:
+            - '@app.fidry_alice_data_fixtures.loader.simple'

@@ -1,0 +1,97 @@
+# https://api-platform.com/docs/schema-generator/configuration
+namespaces:
+    entity: App\Module
+
+validator:
+    assertType: true
+
+accessorMethods: false
+
+types:
+    BillingAddress: # Not in schema.org. Identical to a Person PostalAddress but with every field mandatory
+        guessFrom: PostalAddress
+        properties:
+            addressCountry: ~
+            addressCity: { range: Text }
+            postalCode: ~
+            streetAddress: ~
+
+    Category: # Not in schema.org. Required as a full entity to build a hierarchical tree.
+        properties:
+            children: { range: Category }
+            description: ~
+            image: ~
+            name: ~
+            parent: { range: Category }
+            products: { range: Product }
+            slug: { range: Text }
+
+    Customer: # Not in schema.org. Represent an account for a person who place orders.
+        properties:
+            login: { range: Text }
+            password: { range: Text }
+            person: { range: Person }
+            shoppingCart: { range: Order }
+
+    Offer:
+        properties:
+            itemOffered: { range: Product }
+            price: { range: Number }
+            priceCurrency: ~
+            validFrom: ~
+            validThrough: ~
+
+    Order:
+        properties:
+            billingAddress: { range: BillingAddress }
+            customer: { range: Customer }
+            orderDate: ~
+            orderStatus: { range: Text }
+            paymentMethod: { range: Text }
+
+    OrderItem:
+        properties:
+            order: { range: Order }
+            orderQuantity: ~
+            orderedItem: { range: Offer }
+
+    Person:
+        properties:
+            address: { range: PostalAddress }
+            email: ~
+            familyName: ~
+            givenName: ~
+            image: ~
+            telephone: ~
+
+    PostalAddress:
+        properties:
+            addressCountry: ~
+            addressCity: { range: Text }
+            postalCode: ~
+            streetAddress: ~
+
+    Product:
+        properties:
+            additionalProperty: ~
+            category: { range: Category }
+            description: ~
+            image: ~
+            name: ~
+            offers: ~
+            review: ~
+            sku: ~
+            slug: { range: Text }
+            valueProposition: { range: Text }
+
+    PropertyValue:
+        properties:
+            name: ~
+            value: { range: Text }
+
+    Review:
+        properties:
+            itemReviewed: { range: Product }
+            reviewBody: ~
+            reviewRating: { range: Integer }
+            author: { range: Customer }
