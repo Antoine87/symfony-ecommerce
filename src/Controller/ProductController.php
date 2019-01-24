@@ -20,7 +20,7 @@ use Symfony\Component\Routing\Annotation\Route;
 class ProductController extends AbstractController
 {
     /**
-     * @Route("/", methods={"GET"}, name="categories_index")
+     * @Route("/c", methods={"GET"}, name="categories_index")
      */
     public function categoriesIndex(
         Request $request,
@@ -48,8 +48,8 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/{slug}", defaults={"page": "1"}, methods={"GET"}, name="categories_show")
-     * @Route("/{slug}/page/{page<[1-9]\d*>}", methods={"GET"}, name="categories_show_paginated")
+     * @Route("/c/{slug}", defaults={"page": "1"}, methods={"GET"}, name="categories_show")
+     * @Route("/c/{slug}/page/{page<[1-9]\d*>}", methods={"GET"}, name="categories_show_paginated")
      */
     public function categoriesShow(
         Request $request,
@@ -82,7 +82,7 @@ class ProductController extends AbstractController
     }
 
     /**
-     * @Route("/product/{slug}", methods={"GET"}, name="products_show")
+     * @Route("/p/{slug}", methods={"GET"}, name="products_show")
      */
     public function productsShow(): Response
     {
