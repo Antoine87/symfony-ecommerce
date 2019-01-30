@@ -3,7 +3,7 @@ sudo: false
 
 env:
   global:
-    - SYMFONY_PHPUNIT_DIR=./bin/.phpunit
+    - SYMFONY_DEPRECATIONS_HELPER=29
 
 matrix:
     include:
@@ -22,4 +22,4 @@ install:
 script:
     - yarn
     - yarn run build
-    - ./vendor/bin/simple-phpunit
+    - php bin/phpunit
