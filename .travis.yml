@@ -1,1 +1,19 @@
 language: php
+
+matrix:
+    include:
+        - php: 7.1
+        - php: 7.2
+        - php: 7.3
+
+sudo: false
+
+before_install:
+    - composer self-update
+    - composer clear-cache
+
+install:
+    - travis_retry composer update --no-interaction --no-ansi --no-progress --no-suggest --optimize-autoloader --prefer-stable
+
+script:
+    - ./vendor/bin/phpunit
