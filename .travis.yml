@@ -22,4 +22,4 @@ install:
 script:
     - yarn
     - yarn run build
-    - ./bin/phpunit
+    - ./vendor/bin/phpunit
