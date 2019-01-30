@@ -1,12 +1,16 @@
 language: php
+sudo: false
+
+env:
+  global:
+    - SYMFONY_PHPUNIT_DIR=./bin/.phpunit
 
 matrix:
     include:
         - php: 7.1
         - php: 7.2
         - php: 7.3
-
-sudo: false
+        - php: nightly
 
 before_install:
     - composer self-update
@@ -16,4 +20,6 @@ install:
     - travis_retry composer update --no-interaction --no-ansi --no-progress --no-suggest --optimize-autoloader --prefer-stable
 
 script:
-    - ./vendor/bin/phpunit
+    - yarn
+    - yarn run build
+    - ./bin/phpunit
