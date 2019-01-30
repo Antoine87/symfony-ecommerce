@@ -2,8 +2,9 @@ language: php
 sudo: false
 
 env:
-  global:
-    - SYMFONY_DEPRECATIONS_HELPER=29
+    global:
+        - SYMFONY_PHPUNIT_VERSION=7.5
+        - SYMFONY_DEPRECATIONS_HELPER=29
 
 matrix:
     include:

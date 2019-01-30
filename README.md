@@ -1,6 +1,8 @@
 Symfony 4 E-commerce example project
 ========================
 
+[![Build Status](https://travis-ci.org/Antoine87/symfony-ecommerce.svg?branch=master)](https://travis-ci.org/Antoine87/symfony-ecommerce)
+
 Test sample for an e-commerce web application.
 
 Requirements
